@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use League\CommonMark\Reference\Reference;
 
 return new class extends Migration
 {
@@ -12,7 +13,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            $table->unsignedBigInteger('type_id')->after('content')->nullable();
+            $table->foreign('type_id')
+                  ->references('id')
+                  ->on('types')
+                  ->onDelete('set null')
+                  ->onUpdate('cascade');
+
+            /*
+                OPPURE
+            */
+            //$table->foreignId('category_id')
+            //        ->after('content')
+            //        ->nullable()
+            //        ->constrained()
+            //        ->onDelete('set null')
+            //        ->onUpdate('cascade');
         });
     }
 
@@ -22,7 +38,15 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            if (Schema::hasColumn('posts', 'type_id')) {
+                
+                $table->dropForeign(['type_id']);
+
+                // OPPURE
+                // $table->dropForeign('posts_category_id_foreign');
+
+                $table->dropColumn('type_id');
+            }
         });
     }
 };
