@@ -14,9 +14,9 @@ return new class extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->unsignedBigInteger('type_id')->after('content')->nullable();
-            $table->foreign('type_id')
-                  ->references('id')
-                  ->on('types')
+            $table->foreign('type_id') //foreignKey
+                  ->references('id') //colonna che vogliamo utilizzare come foreignKey
+                  ->on('types') //tabella da cui vogliamo prendere la foreignKey
                   ->onDelete('set null')
                   ->onUpdate('cascade');
 

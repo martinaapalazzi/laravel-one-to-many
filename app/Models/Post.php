@@ -14,4 +14,15 @@ class Post extends Model
         'slug',
         'content'
     ];
+
+    /*
+        Relationships
+    */
+    public function type()
+    {
+        return $this->belongsTo(Post::class); // un Post ha solo un Type
+        // funzione che indentifica la relazione one-to-many
+        // e Post è la taballa dipendente
+        // in cui Type è la tabella indipendente
+    }
 }
