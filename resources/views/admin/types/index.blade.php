@@ -25,7 +25,7 @@
                                     <th scope="col">Title</th>
                                     <th scope="col">Created at</th>
                                     <th scope="col">Show post</th>
-                                    <th scope="col">edit post</th>
+                                    <th scope="col">Edit post</th>
                                     <th scope="col">Delete post</th>
                                 </tr>
                             </thead>
@@ -35,7 +35,25 @@
                                         <th scope="row">{{ $type->id }}</th>
                                         <td>{{ $type->title }}</td>
                                         <td>{{ $type->created_at->format('H:i d/m/Y') }}</td>
-                                        
+                                        <td>
+                                            <a href="{{ route('admin.types.show', ['type' => $type->slug]) }}" class="btn btn-xs btn-primary">
+                                                Show
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.types.edit', ['type' => $type->slug]) }}" class="btn btn-xs btn-warning">
+                                                Edit
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form class="d-inline-block" action="{{ route('admin.types.destroy', ['type' => $type->slug]) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this type');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
                                         
                                     </tr>
                                 @endforeach
