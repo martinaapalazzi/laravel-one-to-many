@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 //Models
 use App\Models\Post;
+use App\Models\Type;
+
 
 class PostController extends Controller
 {
@@ -24,7 +26,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $types = Type::all();
+        return view('admin.posts.create', compact('types'));
     }
 
     /**
@@ -36,6 +39,7 @@ class PostController extends Controller
             'title' => 'required|max:64',
             'slug' => 'nullable|max:1000',
             'content' => 'nullable|max:1000',
+            'type_id' => 'nullable|exists:types,id',
         //   chiavi = name="" degli input 
         ]);
 
@@ -58,8 +62,9 @@ class PostController extends Controller
      */
     public function edit(string $slug)
     {
+        $types = Type::all();
         $post = Post::where('slug', $slug)->firstOrFail();
-        return view('admin.posts.edit',compact('post'));
+        return view('admin.posts.edit',compact('post', 'types'));
     }
 
     /**
@@ -72,6 +77,7 @@ class PostController extends Controller
             'title' => 'required|max:64',
             'slug' => 'nullable|max:1000',
             'content' => 'nullable|max:1000',
+            'type_id' => 'nullable|exists:types,id',
         //   chiavi = name="" degli input 
         ]);
 

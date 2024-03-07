@@ -34,6 +34,23 @@
                             <label for="title" class="form-label"> Title <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="enter the title..." maxlength="64" required value="{{ old ('title')}}">
                         </div>
+
+                        <div class="mb-3">
+                            <label for="type_id" class="form-label">Categoria</label>
+                            <select name="type_id" id="type_id" class="form-select">
+                                <option
+                                    value="{{ old('type_id') == null ? 'selected' : '' }}">
+                                    Seleziona una categoria...
+                                </option>
+                                @foreach ($types as $type)
+                                    <option
+                                        value="{{ $type->id }}"
+                                        {{ old('type_id') == $type->id ? 'selected' : '' }}>
+                                        {{ $type->title }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
         
                         <div class="mb-3">
                             <label for="slug" class="form-label">slug</label>

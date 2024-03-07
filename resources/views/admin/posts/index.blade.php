@@ -37,7 +37,15 @@
                                         <th scope="row">{{ $post->id }}</th>
                                         <td>{{ $post->title }}</td>
                                         <td>{{ $post->slug }}</td>
-                                        <td>{{ $post->type->title }}</td>
+                                        <td>
+                                            @if ($post->type != null)
+                                                <a href="{{ route('admin.types.show', ['type' => $post->type->id]) }}">
+                                                    {{ $post->type->title }}
+                                                </a>
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
                                         <td>{{ $post->created_at->format('H:i d/m/Y') }}</td>
                                         <td>
                                             <a href="{{ route('admin.posts.show', ['post' => $post->slug]) }}" class="btn btn-xs btn-primary">
