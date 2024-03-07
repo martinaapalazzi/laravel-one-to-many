@@ -24,6 +24,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Slug</th>
+                                    <th scope="col">Type</th>
                                     <th scope="col">Created at</th>
                                     <th scope="col">Show post</th>
                                     <th scope="col">edit post</th>
@@ -36,6 +37,7 @@
                                         <th scope="row">{{ $post->id }}</th>
                                         <td>{{ $post->title }}</td>
                                         <td>{{ $post->slug }}</td>
+                                        <td>{{ $post->type->title }}</td>
                                         <td>{{ $post->created_at->format('H:i d/m/Y') }}</td>
                                         <td>
                                             <a href="{{ route('admin.posts.show', ['post' => $post->slug]) }}" class="btn btn-xs btn-primary">
