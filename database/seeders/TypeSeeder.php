@@ -20,5 +20,28 @@ class TypeSeeder extends Seeder
         Schema::withoutForeignKeyConstraints(function () {
             Type::truncate();
         });
+
+        //OPPURE 
+        //Schema::disableForeignKeyConstraints();
+        //Post::truncate();
+        //Schema::enableForeignKeyConstraints();
+
+        $allTypes = [
+            'HTML',
+            'CSS',
+            'JavaScript',
+            'Vue',
+            'SQL',
+            'PHP',
+            'Laravel'
+        ];
+
+        foreach ($allTypes as $singleType) {
+            $type = Type::create([
+                'title' => $singleType,
+                'slug' => str()->slug($singleType),
+            ]);
+        }
+
     }
 }

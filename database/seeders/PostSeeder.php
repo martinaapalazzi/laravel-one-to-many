@@ -11,6 +11,7 @@ use Nette\Schema\Helpers;
 
 //Helpers
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Schema;
 
 class PostSeeder extends Seeder
 {
@@ -19,7 +20,9 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        Post::truncate();
+        Schema::withoutForeignKeyConstraints(function () {
+            Post::truncate();
+        });
 
         for ($i = 0; $i < 10; $i++) {
             $post = new Post();
