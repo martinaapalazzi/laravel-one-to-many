@@ -39,7 +39,8 @@
                             <label for="type_id" class="form-label">Categoria</label>
                             <select name="type_id" id="type_id" class="form-select">
                                 <option
-                                    value="{{ old('type_id') == null ? 'selected' : '' }}">
+                                    value="{{ old('type_id') == null ? 'selected' : '' }}"
+                                    {{ old('type_id') == null ? 'selected' : '' }}>
                                     Seleziona una categoria...
                                 </option>
                                 @foreach ($types as $type)

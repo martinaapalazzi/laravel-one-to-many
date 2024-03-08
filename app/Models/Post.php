@@ -20,7 +20,7 @@ class Post extends Model
     */
     public function type()
     {
-        return $this->belongsTo(Post::class); // un Post ha solo un Type
+        return $this->belongsTo(Type::class); // un Post ha solo un Type
         // funzione che indentifica la relazione one-to-many
         // e Post è la taballa dipendente
         // in cui Type è la tabella indipendente

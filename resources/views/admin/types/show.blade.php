@@ -18,14 +18,15 @@
                         {{ $type->title }}
                     </h1>
                     
-                    <div>
-                        <h3>
-                            {{ $type->slug }}
-                        </h3>
-                        <p>
-                            {{ $type->content }}
-                        </p>
-                    </div>
+                    <ul>
+                        @foreach ($type->posts as $post)
+                            <li>
+                                <a href="{{ route('admin.posts.show', ['post' => $post->id]) }}">
+                                    {{ $post->title }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
 
                 </div>
             </div>
